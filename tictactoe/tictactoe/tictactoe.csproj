@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="DepthAI.cs" />
     <Compile Include="TTTBoard.cs" />
     <Compile Include="TTTGUI.cs">
       <SubType>Form</SubType>

@@ -31,37 +31,37 @@ namespace tictactoe
             set;
         }
 
-        // Are all spaces full? Define
-        public abstract bool IsFull
+        // Are all spaces full? Define a completed game
+        public abstract bool IsComplete
         {
             get;
         }
 
         // Max size of the game board
-        public abstract int Size
+        public abstract int BoardSize
         {
             get;
         }
 
         // A list of the available spaces on the board
-        public abstract List<Space> OpenSquares
+        public abstract List<BoardSpace> OpenSquares
         {
             get;
         }
 
         // Determine a possible winner
-        public abstract Player Winner
+        public abstract Player Winner 
         {
             get;
         }
 
-        // Clone a copy of the board
-        public abstract Board Clone();
+        // Recreate a copy of the board
+        public abstract Board Recreate();
     }
 
     // Informs of one space on the current board. Usage of a struct class, since it is usable when we
     // talk about poins, rectangles and colors. Does not have to be a struct, but is lightweight - and we are testing it out.
-    public struct Space
+    public struct BoardSpace
     {
         public int X;
         public int Y;
@@ -70,7 +70,7 @@ namespace tictactoe
         public double Rank;
 
         // Constructor
-        public Space(int x, int y)
+        public BoardSpace(int x, int y)
         {
             this.X = x;
             this.Y = y;

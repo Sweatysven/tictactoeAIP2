@@ -52,6 +52,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(0, 0), new System.EventArgs()); };
             // 
             // button2
             // 
@@ -61,6 +62,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(0, 1), new System.EventArgs()); };
             // 
             // button3
             // 
@@ -70,6 +72,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(0, 2), new System.EventArgs()); };
             // 
             // button4
             // 
@@ -79,6 +82,7 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(1, 0), new System.EventArgs()); };
             // 
             // button5
             // 
@@ -88,6 +92,7 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(1, 1), new System.EventArgs()); };
             // 
             // button6
             // 
@@ -97,6 +102,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(1, 2), new System.EventArgs()); };
             // 
             // button7
             // 
@@ -106,6 +112,7 @@
             this.button7.TabIndex = 7;
             this.button7.Text = "button7";
             this.button7.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(2, 0), new System.EventArgs()); };
             // 
             // button8
             // 
@@ -115,6 +122,7 @@
             this.button8.TabIndex = 8;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(2, 1), new System.EventArgs()); };
             // 
             // button9
             // 
@@ -124,6 +132,7 @@
             this.button9.TabIndex = 9;
             this.button9.Text = "button9";
             this.button9.UseVisualStyleBackColor = true;
+            this.button1.Click += delegate { this.BtnClick(new BoardSpace(2, 2), new System.EventArgs()); };
             // 
             // comboBox1
             // 

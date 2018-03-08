@@ -22,7 +22,18 @@ namespace tictactoe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            b = new TTTBoard();
+            ReadyBoard();
 
+            button1.Enabled = true;
+            button2.Enabled = true;
+            button3.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
+            button6.Enabled = true;
+            button7.Enabled = true;
+            button8.Enabled = true;
+            button9.Enabled = true;
         }
 
         // Resets the gameboard - can it be done otherwise?
@@ -131,8 +142,36 @@ namespace tictactoe
             
         }
 
+        // Eventhandlers by clicking 
         private void BtnClick(object sender, EventArgs e) 
         {
+            BoardSpace bs = (BoardSpace)sender;
+
+            b[bs.X, bs.Y] = Player.O;
+            ReadyBoard();
+
+            if (WinnerCheck())
+            {
+                Form1_Load(null, new EventArgs());
+            }
+
+            if (b.OpenSquares.Count == b.BoardSize)
+            {
+                Random r = new Random();
+                bs = new BoardSpace(r.Next(0, 3), r.Next(0, 3));
+            }
+            else
+            {
+                bs = DepthAI.GetBestMove(b, Player.X);
+            }
+
+            b[bs.X, bs.Y] = Player.X;
+            ReadyBoard();
+
+            if (WinnerCheck())
+            {
+                Form1_Load(null, new EventArgs());
+            }
 
         }
 

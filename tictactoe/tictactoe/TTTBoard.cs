@@ -162,8 +162,10 @@ namespace tictactoe
 
         public override Board Clone()
         {
-            Board b = new TTTBoard();
-            b.squares = (Player[,])this.squares.Clone();
+            Board b = new TTTBoard
+            {
+                squares = (Player[,])this.squares.Clone()
+            };
             return b;
         }
     }

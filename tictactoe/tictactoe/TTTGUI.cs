@@ -38,7 +38,7 @@ namespace tictactoe
             // | [2,0] [2,1] [2,2] |
             // ---------------------
 
-            /*
+            
             if (b[0, 0] == Player.Open) 
             {
                 button1.Text = "";
@@ -128,7 +128,7 @@ namespace tictactoe
                 button9.Text = b[2, 2].ToString();
                 button9.Enabled = false;
             }
-            */
+            
         }
 
         private void BtnClick(object sender, EventArgs e) 

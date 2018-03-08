@@ -56,7 +56,7 @@ namespace tictactoe
         }
 
         // Recreate a copy of the board
-        public abstract Board Recreate();
+        public abstract Board Clone();
     }
 
     // Informs of one space on the current board. Usage of a struct class, since it is usable when we

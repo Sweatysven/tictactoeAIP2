@@ -28,16 +28,17 @@ namespace tictactoe
         // Resets the gameboard - can it be done otherwise?
         private void ReadyBoard() 
         {
-        // ---------------------
-        // | [0,0] [0,1] [0,2] |
-        // |                   |
-        // |                   |
-        // | [1,0] [1,1] [1,2] |
-        // |                   |
-        // |                   |
-        // | [2,0] [2,1] [2,2] |
-        // ---------------------
+            // ---------------------
+            // | [0,0] [0,1] [0,2] |
+            // |                   |
+            // |                   |
+            // | [1,0] [1,1] [1,2] |
+            // |                   |
+            // |                   |
+            // | [2,0] [2,1] [2,2] |
+            // ---------------------
 
+            /*
             if (b[0, 0] == Player.Open) 
             {
                 button1.Text = "";
@@ -47,7 +48,7 @@ namespace tictactoe
                 button1.Text = b[0, 0].ToString();
                 button1.Enabled = false;
             }
-
+            
             if (b[0, 1] == Player.Open) 
             {
                 button2.Text = "";
@@ -127,6 +128,7 @@ namespace tictactoe
                 button9.Text = b[2, 2].ToString();
                 button9.Enabled = false;
             }
+            */
         }
 
         private void BtnClick(object sender, EventArgs e) 

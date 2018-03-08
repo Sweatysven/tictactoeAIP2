@@ -8,3 +8,13 @@ C:\Users\devan\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tict
 C:\Users\devan\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.exe
 C:\Users\devan\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.pdb
 C:\Users\devan\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.TTTGUI.resources
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.csprojResolveAssemblyReference.cache
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.TTTGUI.resources
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.Properties.Resources.resources
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.csproj.GenerateResource.cache
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.csproj.CoreCompileInputs.cache
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.exe
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.pdb
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.exe.config
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.exe
+C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.pdb

@@ -18,3 +18,13 @@ C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\obj\Deb
 C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.exe.config
 C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.exe
 C:\Users\Maddi-Master\Documents\GitHub\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.pdb
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.exe.config
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.exe
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\bin\Debug\tictactoe.pdb
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.csprojResolveAssemblyReference.cache
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.TTTGUI.resources
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.Properties.Resources.resources
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.csproj.GenerateResource.Cache
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.csproj.CoreCompileInputs.cache
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.exe
+D:\Programmer\GitHub\Repositories\tictactoeAIP2\tictactoe\tictactoe\obj\Debug\tictactoe.pdb

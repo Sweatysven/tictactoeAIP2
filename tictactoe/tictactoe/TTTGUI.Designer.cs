@@ -20,6 +20,7 @@
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -43,9 +44,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+
             // 
             // button1
-            // 
+            //
+            this.button1.Font = new System.Drawing.Font("Arial", 60f);
             this.button1.Location = new System.Drawing.Point(92, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 130);
@@ -55,84 +58,92 @@
             this.button1.Click += delegate { this.BtnClick(new BoardSpace(0, 0), new System.EventArgs()); };
             // 
             // button2
-            // 
+            //
+            this.button2.Font = new System.Drawing.Font("Arial", 60f);
             this.button2.Location = new System.Drawing.Point(228, 33);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 130);
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(0, 1), new System.EventArgs()); };
+            this.button2.Click += delegate { this.BtnClick(new BoardSpace(0, 1), new System.EventArgs()); };
             // 
             // button3
-            // 
+            //
+            this.button3.Font = new System.Drawing.Font("Arial", 60f);
             this.button3.Location = new System.Drawing.Point(364, 33);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 130);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(0, 2), new System.EventArgs()); };
+            this.button3.Click += delegate { this.BtnClick(new BoardSpace(0, 2), new System.EventArgs()); };
             // 
             // button4
-            // 
+            //
+            this.button4.Font = new System.Drawing.Font("Arial", 60f);
             this.button4.Location = new System.Drawing.Point(92, 169);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 130);
             this.button4.TabIndex = 3;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(1, 0), new System.EventArgs()); };
+            this.button4.Click += delegate { this.BtnClick(new BoardSpace(1, 0), new System.EventArgs()); };
             // 
             // button5
-            // 
+            //
+            this.button5.Font = new System.Drawing.Font("Arial", 60f);
             this.button5.Location = new System.Drawing.Point(228, 169);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 130);
             this.button5.TabIndex = 5;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(1, 1), new System.EventArgs()); };
+            this.button5.Click += delegate { this.BtnClick(new BoardSpace(1, 1), new System.EventArgs()); };
             // 
             // button6
-            // 
+            //
+            this.button6.Font = new System.Drawing.Font("Arial", 60f);
             this.button6.Location = new System.Drawing.Point(364, 169);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 130);
             this.button6.TabIndex = 6;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(1, 2), new System.EventArgs()); };
+            this.button6.Click += delegate { this.BtnClick(new BoardSpace(1, 2), new System.EventArgs()); };
             // 
             // button7
-            // 
+            //
+            this.button7.Font = new System.Drawing.Font("Arial", 60f);
             this.button7.Location = new System.Drawing.Point(92, 305);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(130, 130);
             this.button7.TabIndex = 7;
             this.button7.Text = "button7";
             this.button7.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(2, 0), new System.EventArgs()); };
+            this.button7.Click += delegate { this.BtnClick(new BoardSpace(2, 0), new System.EventArgs()); };
             // 
             // button8
-            // 
+            //
+            this.button8.Font = new System.Drawing.Font("Arial", 60f);
             this.button8.Location = new System.Drawing.Point(228, 305);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(130, 130);
             this.button8.TabIndex = 8;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(2, 1), new System.EventArgs()); };
+            this.button8.Click += delegate { this.BtnClick(new BoardSpace(2, 1), new System.EventArgs()); };
             // 
             // button9
-            // 
+            //
+            this.button9.Font = new System.Drawing.Font("Arial", 60f);
             this.button9.Location = new System.Drawing.Point(364, 305);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 130);
             this.button9.TabIndex = 9;
             this.button9.Text = "button9";
             this.button9.UseVisualStyleBackColor = true;
-            this.button1.Click += delegate { this.BtnClick(new BoardSpace(2, 2), new System.EventArgs()); };
+            this.button9.Click += delegate { this.BtnClick(new BoardSpace(2, 2), new System.EventArgs()); };
             // 
             // comboBox1
             // 
@@ -144,6 +155,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(180, 21);
             this.comboBox1.TabIndex = 4;
+            this.comboBox1.SelectionChangeCommitted += delegate { this.comboBox1_SelectedIndexChanged(comboBox1.SelectedItem, new System.EventArgs()); };
             // 
             // comboBox2
             // 
@@ -157,6 +169,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(180, 21);
             this.comboBox2.TabIndex = 11;
+            this.comboBox2.SelectionChangeCommitted += delegate { this.comboBox2_SelectedIndexChanged(comboBox2.SelectedItem, new System.EventArgs()); };
             // 
             // label1
             // 
@@ -205,6 +218,7 @@
             // 
             // TTTGUI
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(831, 487);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -222,11 +236,17 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "TTTGUI";
+            this.Text = "The Tic Tac Toe Game - Created by Mathias Hansen & Mark Elmdam MED6 2018 - Form application";
+            this.Name = "Form1";            
+            this.MaximizeBox = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
+            //this.PerformLayout();
 
         }
+
+        #endregion
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

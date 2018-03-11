@@ -8,7 +8,6 @@ namespace tictactoe
 {
 
     // Inherits classes from the abstract class: Board
-
     class TTTBoard : Board
     {
         // We set the size of the table in this constructor. Where each space is assigned the number 0.
@@ -21,7 +20,9 @@ namespace tictactoe
                 {0, 0, 0},
                 {0, 0, 0}
             };
+
         }
+
 
         public override Player this[int x, int y]
         {
@@ -42,7 +43,7 @@ namespace tictactoe
             {
                 foreach (Player p in squares)
                 {
-                    if (p == Player.Open)
+                    if (p == Player.OpenSpace)
                     {
                         return false;
                     }
@@ -60,6 +61,7 @@ namespace tictactoe
             }
         }
 
+        //We find the open squares 
         public override List<BoardSpace> OpenSquares 
         {
             get 
@@ -70,59 +72,207 @@ namespace tictactoe
                 {
                     for (int y = 0; y <= 2; y++) 
                     {
-                        if (squares[x, y] == Player.Open) 
+                        if (squares[x, y] == Player.OpenSpace) // if the squares are open "0", then we add it to the board space
                         {
                             openSquares.Add(new BoardSpace(x, y));
                         }
                     }     
                 }   
-                return OpenSquares;
+                return openSquares; //return the open squares 
             }   
         }
 
+        //We find all the player O squares 
+        public override List<BoardSpace> OSquares
+        {
+            get
+            {
+                List<BoardSpace> oSquares = new List<BoardSpace>();
+
+                for (int x = 0; x <= 2; x++)
+                {
+                    for (int y = 0; y <= 2; y++)
+                    {
+                        if (squares[x, y] == Player.O) // if the squares are "1", then we add it to the board space
+                        {
+                            oSquares.Add(new BoardSpace(x, y));
+                        }
+                    }
+                }
+                return oSquares;
+            }
+
+        }
+
+        //We find all the squares 
+        public override List<BoardSpace> AllSquares
+        {
+            get
+            {
+                List<BoardSpace> allSquares = new List<BoardSpace>();
+
+                for (int x = 0; x <= 2; x++)
+                {
+                    for (int y = 0; y <= 2; y++)
+                    {
+                        if (squares[x, y] == Player.OpenSpace || squares[x, y] == Player.X || squares[x, y] == Player.O) 
+                        {
+                            allSquares.Add(new BoardSpace(x, y));
+                        }
+                    }
+                }
+                return allSquares; 
+            }
+           
+        }
+
+
+        public override int possibilityToWin
+        {
+            get
+            {
+                List<string> count = new List<string>(new string[10]);
+                int amountOfPos = 0;
+                int addPos = 0;
+
+                // Go through the coloums and add the numbers assigned to the spaces inside. 
+                for (int x = 0; x < 3; x++)
+                {
+                    addPos = 0;
+
+                    for (int y = 0; y < 3; y++)
+                    {
+                        addPos = 0;
+
+                        count.Add(squares[x, y].ToString()); //Converting to ints for the count 
+                        
+
+                        if (count == null || count[0] == " " && count[1] == " " && count[2] == " " ||
+                            count[0] == "O" && count[1] == " " && count[2] == " " ||
+                            count[0] == "O" && count[1] == "O" && count[2] == " " ||
+                            count[0] == "O" && count[1] == "O" && count[2] == "O")
+                        {
+                            addPos = 1;
+                            amountOfPos += addPos;
+                        }
+
+                        if (count == null || count[3] == " " && count[4] == " " && count[5] == " " ||
+                           count[3] == "O" && count[4] == " " && count[5] == " " ||
+                           count[3] == "O" && count[4] == "O" && count[5] == " " ||
+                           count[3] == "O" && count[4] == "O" && count[5] == "O")
+                        {
+                            addPos = 1;
+                            amountOfPos += addPos;
+                        }
+
+                        if (count == null || count[6] == " " && count[7] == " " && count[8] == " " ||
+                           count[6] == "O" && count[7] == " " && count[8] == " " ||
+                           count[6] == "O" && count[7] == "O" && count[8] == " " ||
+                           count[6] == "O" && count[7] == "O" && count[8] == "O")
+                        {
+                            addPos = 1;
+                            amountOfPos += addPos;
+                        }
+
+                    }
+
+
+                }
+
+                // Go through the rows and add the numbers assigned to the spaces inside. 
+                for (int x = 0; x < 3; x++)
+                {
+                    addPos = 0;
+
+                    for (int y = 0; y < 3; y++)
+                    {
+                        addPos = 0;
+                        count.Add(squares[y, x].ToString()); //Converting to ints for the count 
+
+
+                        if (count[0] == " " && count[1] == " " && count[2] == " " ||
+                           count[0] == "O" && count[1] == " " && count[2] == " " ||
+                           count[0] == "O" && count[1] == "O" && count[2] == " " ||
+                           count[0] == "O" && count[1] == "O" && count[2] == "O")
+                        {
+                            addPos = 1;
+                            amountOfPos += addPos;
+                        }
+
+                        if (count[3] == " " && count[4] == " " && count[5] == " " ||
+                           count[3] == "O" && count[4] == " " && count[5] == " " ||
+                           count[3] == "O" && count[4] == "O" && count[5] == " " ||
+                           count[3] == "O" && count[4] == "O" && count[5] == "O")
+                        {
+                            addPos = 1;
+                            amountOfPos += addPos;
+                        }
+
+                        if (count[6] == " " && count[7] == " " && count[8] == " " ||
+                           count[6] == "O" && count[7] == " " && count[8] == " " ||
+                           count[6] == "O" && count[7] == "O" && count[8] == " " ||
+                           count[6] == "O" && count[7] == "O" && count[8] == "O")
+                        {
+                            addPos = 1;
+                            amountOfPos += addPos;
+                        }
+
+                    }
+                   
+                }
+
+                return amountOfPos;              
+            }
+        }
+
+
+        //Determine winner
         public override Player Winner 
         {
             get 
             {
                 int count = 0;
 
-                // for the coloums
-                for (int x = 0; x < 3; x++) 
+                // Go through the coloums and add the numbers assigned to the spaces inside. 
+               for (int x = 0; x < 3; x++) 
                 {
                     count = 0;
 
                     for (int y = 0; y < 3; y++) 
                     {
-                        count += (int)squares[y, x];
+                        count += (int)squares[x, y]; //Converting to ints for the count 
                     }
 
-                    if (count == 3) 
-                    {
-                        return Player.X;
-                    }
-                    if (count == -3) 
+                    
+                    if (count == 3)  //If the count in 1 column is 3, then player X wins
                     {
                         return Player.O;
+                    }
+
+                    if (count == -3)  //If the count in 1 column is -3, then player O wins
+                    {
+                        return Player.X;
                     }
                 }
 
-                // for the rows
+                // Go through the rows and add the numbers assigned to the spaces inside. 
                 for (int x = 0; x < 3; x++) 
                 {
                     count = 0;
 
                     for (int y = 0; y < 3; y++) 
                     {
-                        count += (int)squares[y, x];
+                        count += (int)squares[y, x];   //Converting to ints for the count 
                     }
 
-                    if (count == 3) 
-                    {
-                        return Player.X;
-                    }
-                    if (count == -3) 
+                    if (count == 3)  //If the count in 1 row is 3, then player X wins
                     {
                         return Player.O;
+                    }
+
+                    if (count == -3)  //If the count in 1 row is -3, then player O wins
+                    {
+                        return Player.X;
                     }
                 }
 
@@ -134,11 +284,11 @@ namespace tictactoe
 
                 if (count == 3) 
                 {
-                    return Player.X;
+                    return Player.O;
                 }
                 if (count == -3) 
                 {
-                    return Player.O;
+                    return Player.X;
                 }
 
                 // left to right - diagonal
@@ -149,23 +299,25 @@ namespace tictactoe
 
                 if (count == 3) 
                 {
-                    return Player.X;
+                    return Player.O;
                 }
                 if (count == -3) 
                 {
-                    return Player.O;
+                    return Player.X;
                 }
 
-                return Player.Open;
+                //else return openSpace
+                return Player.OpenSpace;
             }
         }
 
+        //In order for the TicTacToc board to inherit from the game board, we override the board clone, create a new board, 
+        //and then we also clone the squares from "this" board
         public override Board Clone()
         {
-            Board b = new TTTBoard
-            {
-                squares = (Player[,])this.squares.Clone()
-            };
+            Board b = new TTTBoard();
+            b.squares = (Player[,])this.squares.Clone();
+           
             return b;
         }
     }

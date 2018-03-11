@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace tictactoe
 {
     // User possibilities. This type consists of a set of named constants (enumerator list). 
-    // X stand for the number 1. Open moves are the number 0 nad lastly, the move O has the number 2. 
+    // X stand for the number 1. Open moves are the number 0 and lastly, the move O has the number -1. 
     public enum Player
     {
-        X = 1,
-        O = 2,
-        Open = 0,
+        O = 1,
+        X = -1,
+        OpenSpace = 0,
     }
 
     // This class is the one creating new game boards for playing Tic Tac Toe. The information in this class implements
@@ -23,6 +23,7 @@ namespace tictactoe
     {
         // Array to which all sqaures on the board are assigned. These are the moved the players can make their moves.
         public Player[,] squares;
+
 
         // Getters and setters for setting a space on the game board
         public abstract Player this[int x, int y]
@@ -43,8 +44,30 @@ namespace tictactoe
             get;
         }
 
+
         // A list of the available spaces on the board
         public abstract List<BoardSpace> OpenSquares
+        {
+            get;
+        }
+
+        // A list of the player O spaces on the board
+        public abstract List<BoardSpace> OSquares
+        {
+            get;
+
+        }
+
+
+        // A list of all the squares on the board
+        public abstract List<BoardSpace> AllSquares
+        {
+            get;
+            
+        }
+
+        // Determine a possible winner
+        public abstract int possibilityToWin
         {
             get;
         }
@@ -58,6 +81,7 @@ namespace tictactoe
         // Recreate a copy of the board
         public abstract Board Clone();
     }
+
 
     // Informs of one space on the current board. Usage of a struct class, since it is usable when we
     // talk about poins, rectangles and colors. Does not have to be a struct, but is lightweight - and we are testing it out.

@@ -12,18 +12,27 @@ namespace tictactoe
 {
     public partial class TTTGUI : Form
     {
-        // create an object of our Board class
-        Board b;
+        
+        Board b; // create an object of our Board class
+        List<Button> buttonList = new List<Button>(); //Creating new button list to be able to reference all buttons
+        bool playerStart = false;
+        bool AIStart = false;
+        bool depthLevel0 = false;
+        bool depthLevel1 = false;
+        bool depthLevel2 = false;
+        bool depthLevel3 = false;
+
 
         public TTTGUI()
         {
+            
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            b = new TTTBoard();
-            ReadyBoard();
+            b = new TTTBoard(); //Load board
+            DisplayBoard(); //Display the board squares, and their letters
 
             button1.Enabled = true;
             button2.Enabled = true;
@@ -34,166 +43,305 @@ namespace tictactoe
             button7.Enabled = true;
             button8.Enabled = true;
             button9.Enabled = true;
+            comboBox1.Enabled = true;
+
+
         }
 
         // Resets the gameboard - can it be done otherwise?
-        private void ReadyBoard() 
+        private void DisplayBoard() 
         {
-            // ---------------------
-            // | [0,0] [0,1] [0,2] |
-            // |                   |
-            // |                   |
-            // | [1,0] [1,1] [1,2] |
-            // |                   |
-            // |                   |
-            // | [2,0] [2,1] [2,2] |
-            // ---------------------
 
-            
-            if (b[0, 0] == Player.Open) 
-            {
-                button1.Text = "";
-            }
-            else
-            {
-                button1.Text = b[0, 0].ToString();
-                button1.Enabled = false;
-            }
-            
-            if (b[0, 1] == Player.Open) 
-            {
-                button2.Text = "";
-            }
-            else
-            {
-                button2.Text = b[0, 1].ToString();
-                button2.Enabled = false;
-            }
+            // Adding buttons to list
+            buttonList.Add(button1);
+            buttonList.Add(button2);
+            buttonList.Add(button3);
+            buttonList.Add(button4);
+            buttonList.Add(button5);
+            buttonList.Add(button6);
+            buttonList.Add(button7);
+            buttonList.Add(button8);
+            buttonList.Add(button9);
 
-            if (b[0, 2] == Player.Open) 
+
+            // Nested foor loops for displaying column 1 letters
+            for (int x = 0; x <= 0; x++)
             {
-                button3.Text = "";
-            }
-            else
-            {
-                button3.Text = b[0, 2].ToString();
-                button3.Enabled = false;
+                for (int y = 0; y <= 2; y++)
+                {
+                    if (b[x, y] == Player.OpenSpace) //Open square - display no letters.. else display its letter, and disable it
+                    {
+                        buttonList[y].Text = "";
+                    }
+                    else
+                    {
+                        buttonList[y].Text = b[x, y].ToString();
+                        buttonList[y].Enabled = false;
+                    }
+                }
+
             }
 
-            if (b[1, 0] == Player.Open) 
+            // Nested foor loops for displaying column 2 letters
+            for (int x = 1; x <= 1; x++)
             {
-                button4.Text = "";
-            }
-            else
-            {
-                button4.Text = b[1, 0].ToString();
-                button4.Enabled = false;
+                for (int y = 0; y <= 2; y++)
+                {
+                    if (b[x, y] == Player.OpenSpace)
+                    {
+                        buttonList[y + 3].Text = "";
+                    }
+                    else
+                    {
+                        buttonList[y + 3].Text = b[x, y].ToString();
+                        buttonList[y + 3].Enabled = false;
+                    }
+                }
+
             }
 
-            if (b[1, 1] == Player.Open) 
+            // Nested foor loops for displaying column 3 letters
+            for (int x = 2; x <= 2; x++)
             {
-                button5.Text = "";
-            }
-            else
-            {
-                button5.Text = b[1, 1].ToString();
-                button5.Enabled = false;
-            }
+                for (int y = 0; y <= 2; y++)
+                {
+                    if (b[x, y] == Player.OpenSpace)
+                    {
+                        buttonList[y + 6].Text = "";
+                    }
+                    else
+                    {
+                        buttonList[y + 6].Text = b[x, y].ToString();
+                        buttonList[y + 6].Enabled = false;
+                    }
+                }
 
-            if (b[1, 2] == Player.Open) 
-            {
-                button6.Text = "";
             }
-            else
-            {
-                button6.Text = b[1, 2].ToString();
-                button6.Enabled = false;
-            }
+             
+        }//End display board
 
-            if (b[2, 0] == Player.Open) 
-            {
-                button7.Text = "";
-            }
-            else
-            {
-                button7.Text = b[2, 0].ToString();
-                button7.Enabled = false;
-            }
 
-            if (b[2, 1] == Player.Open) 
-            {
-                button8.Text = "";
-            }
-            else
-            {
-                button8.Text = b[2, 1].ToString();
-                button8.Enabled = false;
-            }
 
-            if (b[2, 2] == Player.Open) 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
             {
-                button9.Text = "";
+                
+                playerStart = true;
+                AIStart = false;
             }
-            else
+            else if (comboBox1.SelectedIndex == 1)
             {
-                button9.Text = b[2, 2].ToString();
-                button9.Enabled = false;
-            }
-            
+                
+                AIStart = true;
+                playerStart = false;
+                ChooseInitial();
+                WinnerCheck();               
+            }                      
         }
 
-        // Eventhandlers by clicking 
-        private void BtnClick(object sender, EventArgs e) 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BoardSpace bs = (BoardSpace)sender;
-
-            b[bs.X, bs.Y] = Player.O;
-            ReadyBoard();
-
-            if (WinnerCheck())
+            if (comboBox2.SelectedIndex == 0)
             {
-                Form1_Load(null, new EventArgs());
+                
+                depthLevel0 = true;
+                depthLevel1 = false;
+                depthLevel2 = false;
+                depthLevel3 = false;
+                //playerStart = true;
+                //AIStart = false;
+            }
+            else if (comboBox2.SelectedIndex == 1)
+            {
+                depthLevel0 = false;
+                depthLevel1 = true;
+                depthLevel2 = false;
+                depthLevel3 = false;
+                //AIStart = true;
+                //playerStart = false;
+                //ChooseInitial();
+                //WinnerCheck();
+            }
+            else if (comboBox2.SelectedIndex == 2)
+            {
+
+                //AIStart = true;
+                //playerStart = false;
+                //ChooseInitial();
+                //WinnerCheck();
+            }
+            else if (comboBox2.SelectedIndex == 3)
+            {
+
+                //AIStart = true;
+                //playerStart = false;
+                //ChooseInitial();
+                //WinnerCheck();
             }
 
-            if (b.OpenSquares.Count == b.BoardSize)
-            {
-                Random r = new Random();
-                bs = new BoardSpace(r.Next(0, 3), r.Next(0, 3));
-            }
-            else
-            {
-                bs = DepthAI.GetBestMove(b, Player.X);
-            }
-
-            b[bs.X, bs.Y] = Player.X;
-            ReadyBoard();
-
-            if (WinnerCheck())
-            {
-                Form1_Load(null, new EventArgs());
-            }
 
         }
+
+
+        //Choose initial square function If the AI is starting
+        public void ChooseInitial()
+        {
+            if (depthLevel0)
+            {
+                if (b.OpenSquares.Count == b.BoardSize)
+                {
+                    BoardSpace bs;
+                    Random r = new Random();
+                    bs = new BoardSpace(r.Next(0, 3), r.Next(0, 3));
+                    b[bs.X, bs.Y] = Player.O;
+                    DisplayBoard();
+                }
+
+            }
+
+            if (depthLevel1)
+            {
+                if (b.OpenSquares.Count == b.BoardSize)
+                {
+                    BoardSpace bs;
+                    bs = DepthAI.Depth1Move(b, Player.O);
+                    b[bs.X, bs.Y] = Player.O;
+                    DisplayBoard();
+
+                   
+                }
+
+            }
+        }
+
+
+    // Eventhandlers by clicking 
+    private void BtnClick(object sender, EventArgs e) 
+        {
+
+            //If The player starts 
+            if (playerStart)
+            {              
+                BoardSpace bs = (BoardSpace)sender; //creating new boardspace as object sender
+
+                b[bs.X, bs.Y] = Player.X; //First turn is the player
+                DisplayBoard(); //Display board after choosing
+
+                if (WinnerCheck()) //Check if win, if so, then reload 
+                {
+                    Form1_Load(null, new EventArgs());                                          
+                }
+
+                if (depthLevel0)
+                {
+                    if (b.OpenSquares.Count != b.BoardSize)
+                    {
+                        bs = DepthAI.GetRandomMove(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
+
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                        }
+                    }
+                }
+
+                if (depthLevel1)
+                {
+                    if (b.OpenSquares.Count != b.BoardSize)
+                    {
+                        bs = DepthAI.Depth1Move(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
+
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                        }
+                    }
+                }
+
+                }// End playerStart
+
+
+            //If the AI starts 
+            if (AIStart)
+            {
+               
+                BoardSpace bs = (BoardSpace)sender; //creating new boardspace as object sender              
+
+                if (b.OSquares.Count == 0) //AI starts (if there is no opponents on the board choose initial
+                    ChooseInitial();
+                else
+                {
+                    //Player turn
+                    b[bs.X, bs.Y] = Player.X; //First turn is the player
+                    DisplayBoard(); //Display board after choosing
+
+                    if (WinnerCheck()) //Check if win, if so, then reload 
+                    {
+                        Form1_Load(null, new EventArgs());
+                    }
+
+                    //AI turn
+                    if (depthLevel0)
+                    {
+                        bs = DepthAI.GetRandomMove(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
+
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                            ChooseInitial(); // If The AI wins, select random square
+                        }
+                    }
+                    else if (depthLevel1) //AI turn
+                    {
+                        bs = DepthAI.Depth1Move(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
+
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                            ChooseInitial(); // If The AI wins, select random square
+                        }
+                    }
+
+
+
+
+                }
+            }// End AIStart
+
+
+        }// End button click
+
 
         // Check for a winner and output proper message
         public bool WinnerCheck() 
         {
-            // The questionmark checks for... 
+            // Find winner, and assign to nullable type (Player?)
             Player? p = b.Winner;
 
-            if (p == Player.X) 
+            if (p == Player.O) 
             {
-                MessageBox.Show("AI Wins");
+                MessageBox.Show("          Defeat!");
                 return true;
             }
-            else if (p == Player.O)
+
+            if (p == Player.X)
             {
-                MessageBox.Show("Player Wins");
+                MessageBox.Show("          Victory!");             
                 return true;
             }
-            else if (b.IsComplete)
+
+            if (b.IsComplete)
             {
-                MessageBox.Show("Draw");
+                MessageBox.Show("  Draw... try again");               
                 return true;
             }
             return false;

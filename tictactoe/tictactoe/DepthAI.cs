@@ -7,15 +7,43 @@ using System.Threading.Tasks;
 namespace tictactoe
 {
 
-    // The minimax algorithm is used. This will determine the best move. But is this a decision tree?
-
+    // This is the class for the depth AI. GetRandomMove = random selection, Depth1Move = depth 1,  Depth2Move = depth 2,  Depth3Move = depth 3
     class DepthAI
     {
-        public static BoardSpace GetBestMove(Board b, Player p)
+
+        // -----  GetRandomMove ------- (depth level 0)
+        public static BoardSpace GetRandomMove(Board b, Player p) //Takes the board, and a player
         {
+            BoardSpace? bestSpace = null;
+            List<BoardSpace> openSpaces = b.OpenSquares;          
+           
+            Random r = new Random();
+            int randomIndex = r.Next(0, openSpaces.Count);
+            BoardSpace newSpace = openSpaces[randomIndex];
+
+            bestSpace = newSpace;
+
+            return (BoardSpace)bestSpace;
+        }// End Random Move
+
+
+
+        public static List<BoardSpace> exploredSpaces = new List<BoardSpace>();
+        public static List<int> ColPosToWin = new List<int>();
+        public static BoardSpace finalMove;
+
+        // ------ Depth1move ------ (depth level 1)
+        public static BoardSpace Depth1Move(Board b, Player p) //Takes the board, and a player
+        {
+
             BoardSpace? bestSpace = null;
             List<BoardSpace> openSpaces = b.OpenSquares;
             Board newBoard;
+            finalMove = new BoardSpace();
+
+            int count = 0;
+            int maxIndex = 0;
+
 
             for (int i = 0; i < openSpaces.Count; i++)
             {
@@ -24,37 +52,31 @@ namespace tictactoe
 
                 newBoard[newSpace.X, newSpace.Y] = p;
 
-                if(newBoard.Winner == Player.Open && newBoard.OpenSquares.Count > 0)
-                {
-                    BoardSpace move = GetBestMove(newBoard, ((Player)(-(int)p)));
-                    newSpace.Rank = move.Rank;
-                }
-                else
-                {
-                    if (newBoard.Winner == Player.Open)
-                    {
-                        newSpace.Rank = 0;
-                    }
-                    else if (newBoard.Winner == Player.X)
-                    {
-                        newSpace.Rank = 2;
-                    }
-                    else if (newBoard.Winner == Player.O)
-                    {
-                        newSpace.Rank = 1;
-                    }
-                }
+                count += newBoard.possibilityToWin;
+                ColPosToWin.Add(count);
+                exploredSpaces.Add(newSpace);
+                
 
-                //If the new move is better than our previous move, take it
-                if (bestSpace == null || 
-                        (p == Player.X && newSpace.Rank < ((BoardSpace)bestSpace).Rank) ||
-                        (p == Player.O && newSpace.Rank > ((BoardSpace)bestSpace).Rank))
+                if (newBoard.Winner == Player.OpenSpace && newBoard.OpenSquares.Count > 0)
                 {
-                    bestSpace = newSpace;
+                    Depth1Move(newBoard, p);
                 }
+                else if(newBoard.OpenSquares.Count <= 0)
+                    {
+                   
+                    maxIndex = ColPosToWin.IndexOf(ColPosToWin.Max());
+                    finalMove = exploredSpaces[maxIndex];
+                 
+                
+                }
+               
+               bestSpace = finalMove;  
+                
             }
-
+           
             return (BoardSpace)bestSpace;
-        }
-    }
+        }// End Depth1Move
+
+    }// End DepthAi
+
 }

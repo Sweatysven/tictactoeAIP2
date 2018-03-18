@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace tictactoe
 {
     // User possibilities. This type consists of a set of named constants (enumerator list). 
-    // X stand for the number 1. Open moves are the number 0 and lastly, the move O has the number -1. 
+    // X stand for the number -10. Open moves are the number 0 and lastly, the move O has the number 5. 
     public enum Player
     {
-        O = 1,
-        X = -1,
+        O = 5,
+        X = -10,
         OpenSpace = 0,
     }
 
@@ -72,6 +72,7 @@ namespace tictactoe
             get;
         }
 
+
         // Determine a possible winner
         public abstract Player Winner 
         {
@@ -90,15 +91,11 @@ namespace tictactoe
         public int X;
         public int Y;
 
-        // Needs further investigation !!!! RANK !!!!
-        public double Rank;
-
         // Constructor
         public BoardSpace(int x, int y)
         {
             this.X = x;
             this.Y = y;
-            Rank = 0;
         }
     }
 }

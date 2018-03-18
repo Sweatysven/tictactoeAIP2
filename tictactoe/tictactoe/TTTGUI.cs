@@ -12,7 +12,7 @@ namespace tictactoe
 {
     public partial class TTTGUI : Form
     {
-        
+
         Board b; // create an object of our Board class
         List<Button> buttonList = new List<Button>(); //Creating new button list to be able to reference all buttons
         bool playerStart = false;
@@ -25,7 +25,7 @@ namespace tictactoe
 
         public TTTGUI()
         {
-            
+
             InitializeComponent();
         }
 
@@ -44,12 +44,14 @@ namespace tictactoe
             button8.Enabled = true;
             button9.Enabled = true;
             comboBox1.Enabled = true;
+            comboBox2.Enabled = true;
+
 
 
         }
 
         // Resets the gameboard - can it be done otherwise?
-        private void DisplayBoard() 
+        private void DisplayBoard()
         {
 
             // Adding buttons to list
@@ -117,40 +119,49 @@ namespace tictactoe
                 }
 
             }
-             
-        }//End display board
+
+
+        }//End display board function
 
 
 
+        // Combobox 1 function
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
             {
-                
+
                 playerStart = true;
                 AIStart = false;
             }
             else if (comboBox1.SelectedIndex == 1)
             {
-                
+
                 AIStart = true;
                 playerStart = false;
                 ChooseInitial();
-                WinnerCheck();               
-            }                      
+                WinnerCheck();
+            }
         }
-
+        
+        // Combobox 2 function
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox2.SelectedIndex == 0)
             {
-                
                 depthLevel0 = true;
                 depthLevel1 = false;
                 depthLevel2 = false;
                 depthLevel3 = false;
-                //playerStart = true;
-                //AIStart = false;
+
+                // Proving our AI - variables
+                /*b[0, 0] = Player.O;
+                b[0, 1] = Player.O;
+                b[0, 2] = Player.X;
+                b[1, 0] = Player.X;
+                b[1, 2] = Player.O;
+                DisplayBoard();*/
+
             }
             else if (comboBox2.SelectedIndex == 1)
             {
@@ -158,26 +169,46 @@ namespace tictactoe
                 depthLevel1 = true;
                 depthLevel2 = false;
                 depthLevel3 = false;
-                //AIStart = true;
-                //playerStart = false;
-                //ChooseInitial();
-                //WinnerCheck();
+
+                // Proving our AI - variables
+                /*b[0, 0] = Player.O;
+                b[0, 1] = Player.O;
+                b[0, 2] = Player.X;
+                b[1, 0] = Player.X;
+                b[1, 2] = Player.O;
+                DisplayBoard();*/
+
             }
             else if (comboBox2.SelectedIndex == 2)
             {
+                depthLevel0 = false;
+                depthLevel1 = false;
+                depthLevel2 = true;
+                depthLevel3 = false;
 
-                //AIStart = true;
-                //playerStart = false;
-                //ChooseInitial();
-                //WinnerCheck();
+                // Proving our AI - variables
+                /*b[0, 0] = Player.O;
+                b[0, 1] = Player.O;
+                b[0, 2] = Player.X;
+                b[1, 0] = Player.X;
+                b[1, 2] = Player.O;
+                DisplayBoard();*/
+
             }
             else if (comboBox2.SelectedIndex == 3)
             {
+                depthLevel0 = false;
+                depthLevel1 = false;
+                depthLevel2 = false;
+                depthLevel3 = true;
 
-                //AIStart = true;
-                //playerStart = false;
-                //ChooseInitial();
-                //WinnerCheck();
+                // Proving our AI - variables
+                /*b[0, 0] = Player.O;
+                b[0, 1] = Player.O;
+                b[0, 2] = Player.X;
+                b[1, 0] = Player.X;
+                b[1, 2] = Player.O;
+                DisplayBoard();*/ 
             }
 
 
@@ -197,7 +228,6 @@ namespace tictactoe
                     b[bs.X, bs.Y] = Player.O;
                     DisplayBoard();
                 }
-
             }
 
             if (depthLevel1)
@@ -208,21 +238,41 @@ namespace tictactoe
                     bs = DepthAI.Depth1Move(b, Player.O);
                     b[bs.X, bs.Y] = Player.O;
                     DisplayBoard();
+                }
+            }
 
-                   
+            if (depthLevel2)
+            {
+                if (b.OpenSquares.Count == b.BoardSize)
+                {
+                    BoardSpace bs;
+                    bs = DepthAI.Depth2Move(b, Player.O);
+                    b[bs.X, bs.Y] = Player.O;
+                    DisplayBoard();
+                }
+            }
+
+            if (depthLevel3)
+            {
+                if (b.OpenSquares.Count == b.BoardSize)
+                {
+                    BoardSpace bs;
+                    bs = DepthAI.Depth3Move(b, Player.O);
+                    b[bs.X, bs.Y] = Player.O;
+                    DisplayBoard();
                 }
 
             }
-        }
+        }// End choose initial function
 
 
-    // Eventhandlers by clicking 
-    private void BtnClick(object sender, EventArgs e) 
+        // Eventhandlers by clicking 
+        private void BtnClick(object sender, EventArgs e)
         {
 
             //If The player starts 
             if (playerStart)
-            {              
+            {
                 BoardSpace bs = (BoardSpace)sender; //creating new boardspace as object sender
 
                 b[bs.X, bs.Y] = Player.X; //First turn is the player
@@ -230,7 +280,7 @@ namespace tictactoe
 
                 if (WinnerCheck()) //Check if win, if so, then reload 
                 {
-                    Form1_Load(null, new EventArgs());                                          
+                    Form1_Load(null, new EventArgs());
                 }
 
                 if (depthLevel0)
@@ -263,13 +313,43 @@ namespace tictactoe
                     }
                 }
 
-                }// End playerStart
+                if (depthLevel2)
+                {
+                    if (b.OpenSquares.Count != b.BoardSize)
+                    {
+                        bs = DepthAI.Depth2Move(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
+
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                        }
+                    }
+                }
+
+                if (depthLevel3)
+                {
+                    if (b.OpenSquares.Count != b.BoardSize)
+                    {
+                        bs = DepthAI.Depth3Move(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
+
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                        }
+                    }
+                }
+
+            }// End playerStart
 
 
             //If the AI starts 
             if (AIStart)
             {
-               
+
                 BoardSpace bs = (BoardSpace)sender; //creating new boardspace as object sender              
 
                 if (b.OSquares.Count == 0) //AI starts (if there is no opponents on the board choose initial
@@ -298,7 +378,8 @@ namespace tictactoe
                             ChooseInitial(); // If The AI wins, select random square
                         }
                     }
-                    else if (depthLevel1) //AI turn
+
+                    if (depthLevel1) //AI turn
                     {
                         bs = DepthAI.Depth1Move(b, Player.O);
                         b[bs.X, bs.Y] = Player.O;
@@ -311,9 +392,31 @@ namespace tictactoe
                         }
                     }
 
+                    if (depthLevel2) //AI turn
+                    {
+                        bs = DepthAI.Depth2Move(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
 
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                            ChooseInitial(); // If The AI wins, select random square
+                        }
+                    }
 
+                    if (depthLevel3) //AI turn
+                    {
+                        bs = DepthAI.Depth3Move(b, Player.O);
+                        b[bs.X, bs.Y] = Player.O;
+                        DisplayBoard();
 
+                        if (WinnerCheck())
+                        {
+                            Form1_Load(null, new EventArgs());
+                            ChooseInitial(); // If The AI wins, select random square
+                        }
+                    }
                 }
             }// End AIStart
 
@@ -322,12 +425,12 @@ namespace tictactoe
 
 
         // Check for a winner and output proper message
-        public bool WinnerCheck() 
+        public bool WinnerCheck()
         {
             // Find winner, and assign to nullable type (Player?)
             Player? p = b.Winner;
 
-            if (p == Player.O) 
+            if (p == Player.O)
             {
                 MessageBox.Show("          Defeat!");
                 return true;
@@ -335,16 +438,18 @@ namespace tictactoe
 
             if (p == Player.X)
             {
-                MessageBox.Show("          Victory!");             
+                MessageBox.Show("          Victory!");
                 return true;
             }
 
             if (b.IsComplete)
             {
-                MessageBox.Show("  Draw... try again");               
+                MessageBox.Show("  Draw... try again");
                 return true;
             }
             return false;
-        }                              
+        }
+
+       
     }
 }

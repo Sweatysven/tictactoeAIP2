@@ -23,6 +23,7 @@ namespace tictactoe
 
         }
 
+        
 
         public override Player this[int x, int y]
         {
@@ -48,7 +49,7 @@ namespace tictactoe
                         return false;
                     }
                 }
-                    return true;
+                return true;
             }
         }
 
@@ -62,24 +63,24 @@ namespace tictactoe
         }
 
         //We find the open squares 
-        public override List<BoardSpace> OpenSquares 
+        public override List<BoardSpace> OpenSquares
         {
-            get 
+            get
             {
                 List<BoardSpace> openSquares = new List<BoardSpace>();
 
-                for (int x = 0; x <= 2; x++) 
+                for (int x = 0; x <= 2; x++)
                 {
-                    for (int y = 0; y <= 2; y++) 
+                    for (int y = 0; y <= 2; y++)
                     {
                         if (squares[x, y] == Player.OpenSpace) // if the squares are open "0", then we add it to the board space
                         {
                             openSquares.Add(new BoardSpace(x, y));
                         }
-                    }     
-                }   
+                    }
+                }
                 return openSquares; //return the open squares 
-            }   
+            }
         }
 
         //We find all the player O squares 
@@ -93,7 +94,7 @@ namespace tictactoe
                 {
                     for (int y = 0; y <= 2; y++)
                     {
-                        if (squares[x, y] == Player.O) // if the squares are "1", then we add it to the board space
+                        if (squares[x, y] == Player.O) // if the squares are "5", then we add it to the board space
                         {
                             oSquares.Add(new BoardSpace(x, y));
                         }
@@ -115,193 +116,490 @@ namespace tictactoe
                 {
                     for (int y = 0; y <= 2; y++)
                     {
-                        if (squares[x, y] == Player.OpenSpace || squares[x, y] == Player.X || squares[x, y] == Player.O) 
+                        if (squares[x, y] == Player.OpenSpace || squares[x, y] == Player.X || squares[x, y] == Player.O)
                         {
                             allSquares.Add(new BoardSpace(x, y));
                         }
                     }
                 }
-                return allSquares; 
+                return allSquares;
             }
-           
+
         }
 
+        //public static List<int[]> chanceToBlockSpaces = new List<int[]>();
+       // public static List<int[]> tempSpacesP = new List<int[]>();
 
         public override int possibilityToWin
         {
             get
             {
-                List<string> count = new List<string>(new string[10]);
-                int amountOfPos = 0;
-                int addPos = 0;
+                //player O variables              
+                int OamountOfPos = 0;
+                int OaddPosC = 0;
+                int OaddPosR = 0;
 
-                // Go through the coloums and add the numbers assigned to the spaces inside. 
+
+                //player X variables            
+                int XamountOfPos = 0;
+                int XaddPosC = 0;
+                int XaddPosR = 0;
+
+                // Misc variables
+                bool checkForPos = false;
+                List<string> countC = new List<string>();
+                List<string> countR = new List<string>();
+
+                // Go through the coloums and add the strings assigned to the spaces inside. 
                 for (int x = 0; x < 3; x++)
                 {
-                    addPos = 0;
 
                     for (int y = 0; y < 3; y++)
                     {
-                        addPos = 0;
 
-                        count.Add(squares[x, y].ToString()); //Converting to ints for the count 
-                        
+                        countC.Add(squares[x, y].ToString());  // Adding the strings to the count columns list 
+                        countR.Add(squares[y, x].ToString()); // Adding the strings to the count rows list  
 
-                        if (count == null || count[0] == " " && count[1] == " " && count[2] == " " ||
-                            count[0] == "O" && count[1] == " " && count[2] == " " ||
-                            count[0] == "O" && count[1] == "O" && count[2] == " " ||
-                            count[0] == "O" && count[1] == "O" && count[2] == "O")
-                        {
-                            addPos = 1;
-                            amountOfPos += addPos;
-                        }
 
-                        if (count == null || count[3] == " " && count[4] == " " && count[5] == " " ||
-                           count[3] == "O" && count[4] == " " && count[5] == " " ||
-                           count[3] == "O" && count[4] == "O" && count[5] == " " ||
-                           count[3] == "O" && count[4] == "O" && count[5] == "O")
-                        {
-                            addPos = 1;
-                            amountOfPos += addPos;
-                        }
-
-                        if (count == null || count[6] == " " && count[7] == " " && count[8] == " " ||
-                           count[6] == "O" && count[7] == " " && count[8] == " " ||
-                           count[6] == "O" && count[7] == "O" && count[8] == " " ||
-                           count[6] == "O" && count[7] == "O" && count[8] == "O")
-                        {
-                            addPos = 1;
-                            amountOfPos += addPos;
-                        }
-
+                        if (countC.Count == 8 && countR.Count == 8)
+                            checkForPos = true;
                     }
-
 
                 }
 
-                // Go through the rows and add the numbers assigned to the spaces inside. 
-                for (int x = 0; x < 3; x++)
+
+                if (checkForPos)
                 {
-                    addPos = 0;
 
-                    for (int y = 0; y < 3; y++)
+                    //Check for Player O
+                    //Column 1
+                    if (countC[0] == "X" || countC[1] == "X" || countC[2] == "X")
                     {
-                        addPos = 0;
-                        count.Add(squares[y, x].ToString()); //Converting to ints for the count 
+                        OaddPosC = 0;
+                        OamountOfPos += OaddPosC;
+                    }
+                    else
+                    {
+                        OaddPosC = 1;
+                        OamountOfPos += OaddPosC;
+                    }
+
+                    //Column 2
+                    if (countC[3] == "X" || countC[4] == "X" || countC[5] == "X")
+                    {
+                        OaddPosC = 0;
+                        OamountOfPos += OaddPosC;
+                    }
+                    else
+                    {
+                        OaddPosC = 1;
+                        OamountOfPos += OaddPosC;
+                    }
+
+                    //Column 3
+                    if (countC[6] == "X" || countC[7] == "X" || countC[8] == "X")
+                    {
+                        OaddPosC = 0;
+                        OamountOfPos += OaddPosC;
+                    }
+                    else
+                    {
+                        OaddPosC = 1;
+                        OamountOfPos += OaddPosC;
+                    }
 
 
-                        if (count[0] == " " && count[1] == " " && count[2] == " " ||
-                           count[0] == "O" && count[1] == " " && count[2] == " " ||
-                           count[0] == "O" && count[1] == "O" && count[2] == " " ||
-                           count[0] == "O" && count[1] == "O" && count[2] == "O")
+                    //Row 1
+                    if (countR[0] == "X" || countR[1] == "X" || countR[2] == "X")
+                    {
+                        OaddPosR = 0;
+                        OamountOfPos += OaddPosR;
+                    }
+                    else
+                    {
+                        OaddPosR = 1;
+                        OamountOfPos += OaddPosR;
+                    }
+
+                    //Row 2
+                    if (countR[3] == "X" || countR[4] == "X" || countR[5] == "X")
+                    {
+                        OaddPosR = 0;
+                        OamountOfPos += OaddPosR;
+                    }
+                    else
+                    {
+                        OaddPosR = 1;
+                        OamountOfPos += OaddPosR;
+                    }
+
+                    //Row 3
+                    if (countR[6] == "X" || countR[7] == "X" || countR[8] == "X")
+                    {
+                        OaddPosR = 0;
+                        OamountOfPos += OaddPosR;
+                    }
+                    else
+                    {
+                        OaddPosR = 1;
+                        OamountOfPos += OaddPosR;
+                    }
+
+                    //DiagonalLTR
+                    if (countC[0] == "X" || countC[4] == "X" || countC[8] == "X")
+                    {
+                        OaddPosC = 0;
+                        OamountOfPos += OaddPosC;
+                    }
+                    else
+                    {
+                        OaddPosC = 1;
+                        OamountOfPos += OaddPosC;
+                    }
+
+                    //DiagonalRTL
+                    if (countC[6] == "X" || countC[4] == "X" || countC[2] == "X")
+                    {
+                        OaddPosC = 0;
+                        OamountOfPos += OaddPosC;
+                    }
+                    else
+                    {
+                        OaddPosC = 1;
+                        OamountOfPos += OaddPosC;
+                    }
+
+
+
+
+                    //Check for player X
+                    //Column 1
+                    if (countC[0] == "O" || countC[1] == "O" || countC[2] == "O")
+                    {
+                        XaddPosC = 0;
+                        XamountOfPos += XaddPosC;
+                    }
+                    else
+                    {
+                        XaddPosC = 1;
+                        XamountOfPos += XaddPosC;
+                    }
+
+                    //Column 2
+                    if (countC[3] == "O" || countC[4] == "O" || countC[5] == "O")
+                    {
+                        XaddPosC = 0;
+                        XamountOfPos += XaddPosC;
+                    }
+                    else
+                    {
+                        XaddPosC = 1;
+                        XamountOfPos += XaddPosC;
+                    }
+
+                    //Column 3
+                    if (countC[6] == "O" || countC[7] == "O" || countC[8] == "O")
+                    {
+                        XaddPosC = 0;
+                        XamountOfPos += XaddPosC;
+                    }
+                    else
+                    {
+                        XaddPosC = 1;
+                        XamountOfPos += XaddPosC;
+                    }
+
+
+                    //Row 1
+                    if (countR[0] == "O" || countR[1] == "O" || countR[2] == "O")
+                    {
+                        XaddPosR = 0;
+                        XamountOfPos += XaddPosR;
+                    }
+                    else
+                    {
+                        XaddPosR = 1;
+                        XamountOfPos += XaddPosR;
+                    }
+
+                    //Row 2
+                    if (countR[3] == "O" || countR[4] == "O" || countR[5] == "O")
+                    {
+                        XaddPosR = 0;
+                        XamountOfPos += XaddPosR;
+                    }
+                    else
+                    {
+                        XaddPosR = 1;
+                        XamountOfPos += XaddPosR;
+                    }
+
+                    //Row 
+                    if (countR[6] == "O" || countR[7] == "O" || countR[8] == "O")
+                    {
+                        XaddPosR = 0;
+                        XamountOfPos += XaddPosR;
+                    }
+                    else
+                    {
+                        XaddPosR = 1;
+                        XamountOfPos += XaddPosR;
+                    }
+
+
+                    //DiagonalLTR
+                    if (countC[0] == "O" || countC[4] == "O" || countC[8] == "O")
+                    {
+                        XaddPosC = 0;
+                        XamountOfPos += XaddPosC;
+                    }
+                    else
+                    {
+                        XaddPosC = 1;
+                        XamountOfPos += XaddPosC;
+                    }
+
+                    //DiagonalRTL
+                    if (countC[6] == "O" || countC[4] == "O" || countC[2] == "O")
+                    {
+                        XaddPosC = 0;
+                        XamountOfPos += XaddPosC;
+                    }
+                    else
+                    {
+                        XaddPosC = 1;
+                        XamountOfPos += XaddPosC;
+                    }
+
+
+
+
+                    //------------ Check for Block Possibility ------------- 
+
+                    int blockCount = 0;
+
+                    // Go through the coloums and check for blocking possibility. 
+                    for (int x = 0; x < 3; x++)
+                    {
+                        blockCount = 0;
+
+                        for (int y = 0; y < 3; y++)
                         {
-                            addPos = 1;
-                            amountOfPos += addPos;
+                            blockCount += (int)squares[x, y]; // Add the present player integer representations together 
+
                         }
 
-                        if (count[3] == " " && count[4] == " " && count[5] == " " ||
-                           count[3] == "O" && count[4] == " " && count[5] == " " ||
-                           count[3] == "O" && count[4] == "O" && count[5] == " " ||
-                           count[3] == "O" && count[4] == "O" && count[5] == "O")
+
+                        if (blockCount == -15)  //If the count is -15, then AI will prefer this move to block
                         {
-                            addPos = 1;
-                            amountOfPos += addPos;
+                            OamountOfPos += 10;  // By adding +10 to possibility to win
                         }
 
-                        if (count[6] == " " && count[7] == " " && count[8] == " " ||
-                           count[6] == "O" && count[7] == " " && count[8] == " " ||
-                           count[6] == "O" && count[7] == "O" && count[8] == " " ||
-                           count[6] == "O" && count[7] == "O" && count[8] == "O")
-                        {
-                            addPos = 1;
-                            amountOfPos += addPos;
-                        }
 
                     }
-                   
-                }
 
-                return amountOfPos;              
+                    // Go through the rows and check for blocking possibility.  
+                    for (int x = 0; x < 3; x++)
+                    {
+                        blockCount = 0;
+
+                        for (int y = 0; y < 3; y++)
+                        {
+                            blockCount += (int)squares[y, x];   // Add the present player integer representations together
+                        }
+
+                        if (blockCount == -15)  //If the count is -15, then AI will prefer this move to block
+                        {
+                            OamountOfPos += 10;  // By adding +10 to possibility to win
+                        }
+
+
+                    }
+
+                    // Check for blocking possibility - right to left diagonal
+                    blockCount = 0;
+                    blockCount += (int)squares[0, 0];
+                    blockCount += (int)squares[1, 1];
+                    blockCount += (int)squares[2, 2];
+
+                    if (blockCount == -15)  //If the count is -15, then AI will prefer this move to block
+                    {
+                        OamountOfPos += 10;
+                    }
+
+
+                    // Check for blocking possibility - left to right diagonal
+                    blockCount = 0;
+                    blockCount += (int)squares[0, 2];
+                    blockCount += (int)squares[1, 1];
+                    blockCount += (int)squares[2, 0];
+
+                    if (blockCount == -15)  //If the count is -15, then AI will prefer this move to block
+                    {
+                        OamountOfPos += 10;
+                    }
+
+
+
+
+                    //------------ Check for Winner Possibility ------------- 
+
+                    int winnerChance = 0;
+
+                    // Go through the coloums and check for winner possibility. 
+                    for (int x = 0; x < 3; x++)
+                    {
+                        winnerChance = 0;
+
+                        for (int y = 0; y < 3; y++)
+                        {
+                            winnerChance += (int)squares[x, y]; // Add the present player integer representations together 
+
+                        }
+
+
+                        if (winnerChance == 15)  //If the count is 15, then AI will prefer this move to win
+                        {
+                            OamountOfPos += 20;  // By adding +20 to possibility to win
+                        }
+
+
+                    }
+
+                    // Go through the rows and check for winner possibility.  
+                    for (int x = 0; x < 3; x++)
+                    {
+                        winnerChance = 0;
+
+                        for (int y = 0; y < 3; y++)
+                        {
+                            winnerChance += (int)squares[y, x];   // Add the present player integer representations together
+                        }
+
+                        if (winnerChance == 15)  //If the count is 15, then AI will prefer this move to block
+                        {
+                            OamountOfPos += 20;  // By adding +20 to possibility to win
+                        }
+
+
+                    }
+
+                    // Check for winner possibility - right to left diagonal
+                    winnerChance = 0;
+                    winnerChance += (int)squares[0, 0];
+                    winnerChance += (int)squares[1, 1];
+                    winnerChance += (int)squares[2, 2];
+
+                    if (winnerChance == 15)  //If the count is 15, then AI will prefer this move to block
+                    {
+                        OamountOfPos += 20;
+                    }
+
+
+                    // Check for winner possibility - left to right diagonal
+                    winnerChance = 0;
+                    winnerChance += (int)squares[0, 2];
+                    winnerChance += (int)squares[1, 1];
+                    winnerChance += (int)squares[2, 0];
+
+                    if (winnerChance == 15)  //If the count is 15, then AI will prefer this move to block
+                    {
+                        OamountOfPos += 20;
+                    }
+
+
+
+
+                    return OamountOfPos - XamountOfPos;  // Return  AI win possibility - Players win possibility
+
+    
+                }
+                
+
+                return 0;  // else return 0
             }
-        }
+        } // End possibility to win
 
 
-        //Determine winner
-        public override Player Winner 
+
+        // Check for a winner
+        public override Player Winner
         {
-            get 
+            get
             {
-                int count = 0;
+                int winnerCount = 0;
 
-                // Go through the coloums and add the numbers assigned to the spaces inside. 
-               for (int x = 0; x < 3; x++) 
+                // Go through the columns and check for a winner  
+                for (int x = 0; x < 3; x++)
                 {
-                    count = 0;
+                    winnerCount = 0;
 
-                    for (int y = 0; y < 3; y++) 
+                    for (int y = 0; y < 3; y++)
                     {
-                        count += (int)squares[x, y]; //Converting to ints for the count 
+                        winnerCount += (int)squares[x, y]; // Add the present player integer representations together
                     }
 
-                    
-                    if (count == 3)  //If the count in 1 column is 3, then player X wins
+
+                    if (winnerCount == 15)  //If the count is 15, then player O wins 
                     {
                         return Player.O;
                     }
 
-                    if (count == -3)  //If the count in 1 column is -3, then player O wins
+                    if (winnerCount == -30)  //If the count is -30, then player X wins
                     {
                         return Player.X;
                     }
                 }
 
-                // Go through the rows and add the numbers assigned to the spaces inside. 
-                for (int x = 0; x < 3; x++) 
+                // Go through the rows and check for a winner 
+                for (int x = 0; x < 3; x++)
                 {
-                    count = 0;
+                    winnerCount = 0;
 
-                    for (int y = 0; y < 3; y++) 
+                    for (int y = 0; y < 3; y++)
                     {
-                        count += (int)squares[y, x];   //Converting to ints for the count 
+                        winnerCount += (int)squares[y, x];  // Add the present player integer representations together
                     }
 
-                    if (count == 3)  //If the count in 1 row is 3, then player X wins
+
+
+                    if (winnerCount == 15)  //If the count is 15, then player O wins
                     {
                         return Player.O;
                     }
 
-                    if (count == -3)  //If the count in 1 row is -3, then player O wins
+                    if (winnerCount == -30)  //If the count is -30, then player X wins
                     {
                         return Player.X;
                     }
                 }
 
-                // right to left - diagonal
-                count = 0;
-                count += (int)squares[0, 0];
-                count += (int)squares[1, 1];
-                count += (int)squares[2, 2];
+                // Check for a winner - right to left diagonal
+                winnerCount = 0;
+                winnerCount += (int)squares[0, 0];
+                winnerCount += (int)squares[1, 1];
+                winnerCount += (int)squares[2, 2];
 
-                if (count == 3) 
+                if (winnerCount == 15)
                 {
                     return Player.O;
                 }
-                if (count == -3) 
+                if (winnerCount == -30)
                 {
                     return Player.X;
                 }
 
                 // left to right - diagonal
-                count = 0;
-                count += (int)squares[0, 2];
-                count += (int)squares[1, 1];
-                count += (int)squares[2, 0];
+                winnerCount = 0;
+                winnerCount += (int)squares[0, 2];
+                winnerCount += (int)squares[1, 1];
+                winnerCount += (int)squares[2, 0];
 
-                if (count == 3) 
+                if (winnerCount == 15)
                 {
                     return Player.O;
                 }
-                if (count == -3) 
+                if (winnerCount == -30)
                 {
                     return Player.X;
                 }
@@ -317,7 +615,7 @@ namespace tictactoe
         {
             Board b = new TTTBoard();
             b.squares = (Player[,])this.squares.Clone();
-           
+
             return b;
         }
     }
